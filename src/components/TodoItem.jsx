@@ -1,4 +1,4 @@
-import { useState, memo, useRef, useCallback } from 'react';
+import { useState, memo, useRef } from 'react';
 
 // React.memo
 // 컴포넌트 메모이제이션
@@ -9,14 +9,10 @@ const TodoItem = memo(
         const [isEditing, setIsEditing] = useState(false);
         const inputRef = useRef(null);
 
-        // useCallback
-        // 함수 메모이제이션
-        // 자식 컴포넌트에 함수를 전달할 때 사용
-        // 함수 자체를 메모이제이션하여 불필요한 렌더링 방지
-        const handleEdit = useCallback(() => {
+        const handleEdit = () => {
             onEdit(todo.id, inputRef.current.value);
             setIsEditing(false);
-        }, [todo.id, onEdit]);
+        };
         // inputRef
         // onChange 이벤트를 활용하지 않고 인풋 값을 활용할 때 사용
         // 컴포넌트가 마운트될 때 초기화되지 않고 컴포넌트가 업데이트될 때만 초기화됨

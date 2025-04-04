@@ -1,4 +1,4 @@
-import { memo, useRef, useCallback } from 'react';
+import { memo, useRef } from 'react';
 
 // React.memo
 // 컴포넌트 메모이제이션
@@ -7,20 +7,17 @@ import { memo, useRef, useCallback } from 'react';
 const TodoForm = memo(({ onAdd }) => {
     const inputRef = useRef(null);
 
-    const handleSubmit = useCallback(
-        (e) => {
-            e.preventDefault();
-            const text = inputRef.current.value;
-            if (text.trim() === '') {
-                inputRef.current.focus();
-                return;
-            } else {
-                onAdd(text);
-                inputRef.current.value = '';
-            }
-        },
-        [onAdd],
-    );
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const text = inputRef.current.value;
+        if (text.trim() === '') {
+            inputRef.current.focus();
+            return;
+        } else {
+            onAdd(text);
+            inputRef.current.value = '';
+        }
+    };
 
     // inputRef
     // onChange 이벤트를 활용하지 않고 인풋 값을 활용할 때 사용
